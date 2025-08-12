@@ -1,0 +1,220 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site1.Master.cs" Inherits="Pardis.Site1" %>
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head runat="server">
+    <title>آکادمی تنیس روی میز پردیس</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <link id="lnkFavicon" runat="server" rel="icon" href="/favicon.ico" type="image/png" />
+    <link rel="stylesheet" href="/styles/theme.css" />
+    <style>
+        /* Ensure mobile menu works on all pages */
+        .mobile-menu { transition: transform 0.3s ease-in-out; transform: translateX(100%); }
+        .mobile-menu.active { transform: translateX(0); }
+        /* Consistent desktop nav layout */
+        .nav-list { display:flex; gap:12px; align-items:center; white-space:nowrap; margin:0; padding:0; }
+        .nav-list li { list-style:none; }
+        /* Global nav underline hover (moved from Default.aspx) */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: currentColor; /* matches text color */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="text-right min-h-screen flex flex-col">
+    <form id="form1" runat="server" class="min-h-screen flex flex-col">
+        <header class="site-gradient-dark text-white sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <a href="/" class="flex items-center hover:opacity-90 transition">
+                        <asp:Image ID="imgLogo" runat="server" CssClass="h-10 w-10 mr-3 rounded-full bg-white p-1" />
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-white"><asp:Literal ID="litSiteTitle" runat="server" /></h1>
+                        </div>
+                    </a>
+
+                    <!-- منوی دسکتاپ -->
+                    <nav class="hidden md:flex items-center gap-2">
+                        <asp:Repeater ID="rptMenuDesktop" runat="server">
+                            <HeaderTemplate><ul class="nav-list"></HeaderTemplate>
+                            <ItemTemplate>
+                                <li><a href="<%# Eval("Url") %>" class="nav-link px-3 py-2 hover:text-blue-200 transition duration-300"><%# Eval("Title") %></a></li>
+                            </ItemTemplate>
+                            <FooterTemplate></ul></FooterTemplate>
+                        </asp:Repeater>
+                        <ul class="nav-list ml-4">
+                            <li><a href="/Competitions.aspx" class="nav-link px-3 py-2 hover:text-blue-200 transition">مسابقات</a></li>
+                            <li><a href="/Store.aspx" class="nav-link px-3 py-2 hover:text-blue-200 transition">فروشگاه</a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- دکمه منوی موبایل -->
+                    <div class="hidden md:flex items-center gap-4">
+                        <a href="/Account/Panel.aspx" class="relative inline-flex items-center justify-center">
+                            <i class="fas fa-user-circle text-white text-xl"></i>
+                        </a>
+                        <a href="/Cart.aspx" class="relative inline-flex items-center justify-center">
+                            <i class="fas fa-shopping-cart text-white text-xl"></i>
+                            <span class="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full px-1"><asp:Literal ID="litCartCount" runat="server" /></span>
+                        </a>
+                    </div>
+
+                    <button id="mobile-menu-button" type="button" class="md:hidden text-white focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- منوی موبایل -->
+            <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-blue-900 z-50 shadow-lg p-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-white">منو</h3>
+                    <button id="close-menu" type="button" class="text-white focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <asp:Repeater ID="rptMenuMobile" runat="server">
+                    <HeaderTemplate><ul class="space-y-4"></HeaderTemplate>
+                    <ItemTemplate>
+                        <li><a href="<%# Eval("Url") %>" class="block py-2 px-4 text-white hover:bg-blue-800 rounded"><%# Eval("Title") %></a></li>
+                    </ItemTemplate>
+                    <FooterTemplate></ul></FooterTemplate>
+                </asp:Repeater>
+                <div class="mt-6 border-t border-blue-800 pt-4">
+                    <a href="/Competitions.aspx" class="block py-2 px-4 bg-blue-700 hover:bg-blue-600 rounded text-white text-center">ثبت‌نام مسابقات</a>
+                    <a href="/Store.aspx" class="block py-2 px-4 bg-blue-700 hover:bg-blue-600 rounded text-white text-center mt-2">فروشگاه</a>
+                </div>
+            </div>
+        </header>
+        <main class="flex-1">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        </main>
+        <footer class="site-gradient-dark text-white py-10">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <asp:Image ID="imgFooterLogo" runat="server" CssClass="h-10 w-10 ml-3 rounded-full bg-white p-1" />
+                            <h3 class="text-xl font-bold"><asp:Literal ID="litFooterTitle" runat="server" /></h3>
+                        </div>
+                        <p class="text-blue-200 mb-4"><asp:Literal ID="litFooterDescription" runat="server" /></p>
+                        <div class="flex mt-4 space-x-4 space-x-reverse">
+                            <asp:Repeater ID="rptSocial" runat="server">
+                                <ItemTemplate>
+                                    <a href="<%# Eval("Url") %>" class="bg-blue-800 hover:bg-blue-700 h-10 w-10 rounded-full flex items-center justify-center transition-colors duration-300" target="_blank" rel="noopener">
+                                        <i class="<%# Eval("IconClass") %> text-white"></i>
+                                    </a>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">دسترسی سریع</h3>
+                        <asp:Repeater ID="rptFooterLinks" runat="server">
+                            <HeaderTemplate><ul class="space-y-2 text-blue-200"></HeaderTemplate>
+                            <ItemTemplate>
+                                <li><a href="<%# Eval("Url") %>" class="hover:text-white transition duration-300"><%# Eval("Title") %></a></li>
+                            </ItemTemplate>
+                            <FooterTemplate></ul></FooterTemplate>
+                        </asp:Repeater>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">تماس با ما</h3>
+                        <ul class="space-y-3 text-blue-200">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <span><asp:Literal ID="litAddress" runat="server" /></span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                <span><asp:Literal ID="litPhone" runat="server" /></span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <span><asp:Literal ID="litEmail" runat="server" /></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-blue-800 mt-8 pt-6 text-center text-blue-300">
+                    <p><asp:Literal ID="litCopyright" runat="server" /></p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bottom mobile nav -->
+        <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow z-50">
+            <div class="grid grid-cols-4 text-center">
+                <a href="/" class="py-2 flex flex-col items-center text-gray-700">
+                    <i class="fas fa-home text-lg"></i>
+                    <span class="text-xs mt-1">خانه</span>
+                </a>
+                <a href="/Competitions.aspx" class="py-2 flex flex-col items-center text-gray-700">
+                    <i class="fas fa-trophy text-lg"></i>
+                    <span class="text-xs mt-1">مسابقات</span>
+                </a>
+                <a href="/Store.aspx" class="py-2 flex flex-col items-center text-gray-700">
+                    <i class="fas fa-store text-lg"></i>
+                    <span class="text-xs mt-1">فروشگاه</span>
+                </a>
+                <asp:HyperLink ID="lnkBottomAuth" runat="server" NavigateUrl="/Account/Login.aspx" CssClass="py-2 flex flex-col items-center text-gray-700">
+                    <i class="fas fa-user text-lg"></i>
+                    <span class="text-xs mt-1">ورود/ثبت‌نام</span>
+                </asp:HyperLink>
+                <asp:HyperLink ID="lnkBottomPanel" runat="server" NavigateUrl="/Account/Panel.aspx" CssClass="py-2 flex flex-col items-center text-gray-700" Visible="false">
+                    <i class="fas fa-user-cog text-lg"></i>
+                    <span class="text-xs mt-1">پنل</span>
+                </asp:HyperLink>
+            </div>
+        </nav>
+    </form>
+    <script>
+        (function () {
+            try {
+                var openBtn = document.getElementById('mobile-menu-button');
+                var closeBtn = document.getElementById('close-menu');
+                var menu = document.getElementById('mobile-menu');
+                if (openBtn && menu) {
+                    openBtn.addEventListener('click', function (e) { e.preventDefault(); menu.classList.add('active'); return false; });
+                }
+                if (closeBtn && menu) {
+                    closeBtn.addEventListener('click', function (e) { e.preventDefault(); menu.classList.remove('active'); return false; });
+                }
+                // Close menu when a link is clicked (mobile UX)
+                if (menu) {
+                    var links = menu.querySelectorAll('a');
+                    for (var i = 0; i < links.length; i++) {
+                        links[i].addEventListener('click', function () { menu.classList.remove('active'); });
+                    }
+                }
+            } catch (e) { }
+        })();
+    </script>
+</body>
+</html>

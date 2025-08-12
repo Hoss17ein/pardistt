@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PecPGW.Samples.WebApp.WebForms.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PecPGW_Samples_WebApp_WebForms_ParsianPGWBillPaymentServices_BillService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://pec.shaparak.ir/NewIPGServices/bill/billservice.asmx</Value>
+    </Setting>
+    <Setting Name="PecPGW_Samples_WebApp_WebForms_ParsianPGWSalePaymentServices_SaleService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://pec.shaparak.ir/newipgservices/sale/saleservice.asmx</Value>
+    </Setting>
+    <Setting Name="PecPGW_Samples_WebApp_WebForms_ParsianPGWConfirmPaymentServices_ConfirmService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://pec.shaparak.ir/NewIPGServices/confirm/confirmservice.asmx</Value>
+    </Setting>
+    <Setting Name="LoginAccount" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">abcdef1ls</Value>
+    </Setting>
+    <Setting Name="PecPGW_Samples_WebApp_WebForms_ParsianPGWReversalServices_ReversalService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://pec.shaparak.ir/NewIPGServices/reverse/reversalservice.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,103 @@
+:root{
+  --bg-dark:#0b1226;
+  --bg-dark-2:#111a37;
+  --brand:#1d4ed8;
+  --brand-2:#7c3aed;
+  --text-muted:#94a3b8;
+}
+
+/* Dark gradient backgrounds like sports portals */
+.site-gradient-dark{background:linear-gradient(180deg,var(--bg-dark) 0%,var(--bg-dark-2) 100%);color:#fff}
+
+/* Generic card hover */
+.card-hover{transition:transform .25s ease,box-shadow .25s ease}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 18px 35px rgba(0,0,0,.18)}
+
+/* Horizontal carousel */
+.carousel{position:relative}
+.carousel-track{display:flex;gap:16px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:6px}
+.carousel-track::-webkit-scrollbar{height:0}
+.carousel-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,0.7);
+    color:white;
+    border:2px solid rgba(255,255,255,0.3);
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    backdrop-filter:blur(10px);
+    z-index:25;
+}
+.carousel-arrow:hover{
+    background-color:rgba(0,0,0,0.9);
+    border-color:rgba(255,255,255,0.6);
+    transform:translateY(-50%) scale(1.1);
+}
+.carousel-prev{right:auto;left:8px}
+.carousel-next{right:8px}
+
+/* Story chip cards */
+.story-chip{width:210px;min-width:210px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.08)}
+.story-chip .thumb{height:120px;object-fit:cover;width:100%}
+.story-chip .meta{padding:10px 12px}
+.badge-new{background:linear-gradient(45deg,var(--brand),var(--brand-2));color:#fff;border-radius:10px;font-size:11px;padding:2px 8px}
+
+/* Wider news/gallery cards */
+.card-wide{width:280px;min-width:280px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 12px 26px rgba(0,0,0,.08)}
+.card-wide .thumb{height:160px;object-fit:cover;width:100%}
+.card-wide .content{padding:12px 14px}
+.card-wide .title{font-weight:800;color:#0f172a}
+.card-wide .muted{color:var(--text-muted);font-size:12px}
+
+.section-title{font-weight:900;letter-spacing:.5px;margin-bottom:12px}
+
+/* Quick-link tiles */
+.quick-card{width:260px;min-width:260px;border-radius:18px;overflow:hidden;background:#0d1b3a;color:#fff;position:relative}
+.quick-card .tile{position:relative;height:160px;background:linear-gradient(135deg,rgba(29,78,216,.85),rgba(124,58,237,.9));display:flex;align-items:flex-end;padding:16px}
+.quick-card h4{font-weight:800;letter-spacing:.4px}
+/* Illustration for quick links */
+.quick-illus{position:absolute;right:10px;top:10px;width:84px;opacity:.28;pointer-events:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.12))}
+
+/* CTA banner */
+.cta-banner{border-radius:16px;background:linear-gradient(90deg,rgba(255,255,255,.9),#fff);}
+
+/* Product cards for store */
+.product-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 12px 26px rgba(0,0,0,.08);display:flex;flex-direction:column}
+.product-card .product-thumb{width:100%;height:180px;object-fit:cover;background:#f3f4f6}
+.product-card .product-body{padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.product-card .product-title{font-weight:800;color:#0f172a;min-height:40px}
+.product-card .product-price{color:#1d4ed8;font-weight:900}
+.product-card .product-actions{display:flex;gap:8px;margin-top:6px}
+.btn-primary{background:linear-gradient(45deg,var(--brand),var(--brand-2));color:#fff;border:none;border-radius:12px;padding:8px 12px;font-weight:700}
+.btn-secondary{background:#0d1b3a;color:#fff;border:none;border-radius:12px;padding:8px 12px;font-weight:700}
+
+/* Category tiles with paddles illustration */
+.category-tile{position:relative;overflow:hidden}
+.category-tile .illus{position:absolute;right:-6px;bottom:-8px;width:130px;opacity:.3;pointer-events:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.12))}
+.category-tile .illus svg{display:block;width:100%;height:auto}
+
+/* Coach cards with modern design */
+.coach-modern{width:300px;min-width:300px;background:linear-gradient(135deg,#1e293b,#334155);border-radius:20px;overflow:hidden;position:relative;color:#fff}
+.coach-modern .coach-avatar{width:100%;height:200px;background:linear-gradient(135deg,#475569,#64748b);display:flex;align-items:center;justify-content:center;position:relative}
+.coach-modern .coach-number{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:4rem;font-weight:900;color:#94a3b8;opacity:.6}
+.coach-modern .coach-info{padding:20px}
+.coach-modern .coach-name{font-size:1.2rem;font-weight:800;margin-bottom:4px;letter-spacing:.5px}
+.coach-modern .coach-role{color:#cbd5e1;font-size:.9rem;margin-bottom:12px}
+.coach-modern .coach-stats{display:flex;gap:16px;padding-top:12px;border-top:1px solid #475569}
+.coach-modern .stat{text-align:center}
+.coach-modern .stat-value{font-weight:700;color:#60a5fa}
+.coach-modern .stat-label{font-size:.75rem;color:#94a3b8}
+
+/* Pagination dots */
+.pagination-dots{display:flex;gap:8px;justify-content:center;margin-top:20px}
+.pagination-dot{width:8px;height:8px;border-radius:50%;background:#475569;cursor:pointer;transition:all .3s ease}
+.pagination-dot.active{background:#f59e0b;width:24px;border-radius:4px}
+
+
